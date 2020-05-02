@@ -9,6 +9,7 @@ const usersRouter = require('../users/users-router.js');
 
 const server = express();
 
+
 server.use(helmet());
 server.use(cors());
 server.use(express.json());
@@ -16,5 +17,9 @@ server.use(express.json());
 server.use('/api/auth', authRouter);
 server.use('/api/jokes', authenticate, jokesRouter);
 server.use('/api/users', authenticate, usersRouter);
+
+server.get("/", (req, res) => {
+  res.status(200).json({ api: "running" });
+});
 
 module.exports = server;
